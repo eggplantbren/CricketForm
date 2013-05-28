@@ -10,21 +10,38 @@ const int MyModel::max_score = 500;
 
 MyModel::MyModel()
 :effective_average(max_score)
-,log_prob_greater(max_score)
+,log_prob_geq(max_score)
 ,log_prob_equal(max_score)
 {
 }
 
 void MyModel::assemble()
 {
+	// Compute effective average as a function of score
 	for(int i=0; i<max_score; i++)
 		effective_average[i] = mu0 + (mu1 - mu0)*exp(-i/L);
 
-	log_prob_greater[0] = 0.;
-	for(int i=0; i<max_score; i++)
+	// Compute log[P(X >= x)]
+	log_prob_geq[0] = 0.;
+	for(int i=1; i<max_score; i++)
 	{
+		log_prob_geq[i] = log_prob_geq[i-1] +
+		log(effective_average[i-1]/(effective_average[i-1] + 1.));
 	}
 
+	// Compute log[P(X=x)] = log[P(X >= x) - P(X >= x+1)]
+	double g1, g2, f, max;
+	for(int i=0; i<max_score - 1; i++)
+	{
+		g1 = log_prob_geq[i];
+		g2 = log_prob_geq[i+1];
+		max = g1;
+		if(g2 > g1)
+			max = g2;
+		f = exp(g1 - max) - exp(g2 - max);
+		log_prob_equal[i] = log(f) + max;
+	}
+	log_prob_equal[max_score - 1] = log_prob_geq[max_score - 1];
 }
 
 void MyModel::fromPrior()
@@ -32,6 +49,7 @@ void MyModel::fromPrior()
 	mu0 = exp(log(3.) + log(60./3.)*randomU());
 	mu1 = exp(log(3.) + log(60./3.)*randomU());
 	L = exp(log(0.1) + log(100./0.1)*randomU());
+
 	assemble();
 }
 
