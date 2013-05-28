@@ -14,7 +14,8 @@ class MyModel:public DNest3::Model
 		double L;
 
 		// Derived stuff: the hazard function etc
-		std::vector<double> effective_average;
+		std::vector<double> effective_average,
+			log_prob_greater, log_prob_equal;
 
 		// Compute the derived stuff
 		void assemble();

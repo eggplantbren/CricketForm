@@ -10,6 +10,8 @@ const int MyModel::max_score = 500;
 
 MyModel::MyModel()
 :effective_average(max_score)
+,log_prob_greater(max_score)
+,log_prob_equal(max_score)
 {
 }
 
@@ -17,6 +19,12 @@ void MyModel::assemble()
 {
 	for(int i=0; i<max_score; i++)
 		effective_average[i] = mu0 + (mu1 - mu0)*exp(-i/L);
+
+	log_prob_greater[0] = 0.;
+	for(int i=0; i<max_score; i++)
+	{
+	}
+
 }
 
 void MyModel::fromPrior()
