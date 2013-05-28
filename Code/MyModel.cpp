@@ -6,8 +6,17 @@
 using namespace std;
 using namespace DNest3;
 
+const int MyModel::max_score = 500;
+
 MyModel::MyModel()
+:effective_average(max_score)
 {
+}
+
+void MyModel::assemble()
+{
+	for(int i=0; i<max_score; i++)
+		effective_average[i] = mu0 + (mu1 - mu0)*exp(-i/L);
 }
 
 void MyModel::fromPrior()
@@ -15,6 +24,7 @@ void MyModel::fromPrior()
 	mu0 = exp(log(3.) + log(60./3.)*randomU());
 	mu1 = exp(log(3.) + log(60./3.)*randomU());
 	L = exp(log(0.1) + log(100./0.1)*randomU());
+	assemble();
 }
 
 double MyModel::perturb1()
@@ -50,6 +60,7 @@ double MyModel::perturb()
 	int passes = 1 + randInt(4);
 	for(int i=0; i<passes; i++)
 		logH += perturb1();
+	assemble();
 	return logH;
 }
 
