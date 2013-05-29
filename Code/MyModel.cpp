@@ -68,7 +68,7 @@ double MyModel::perturb1()
 	{
 		mu1 = log(mu1);
 		mu1 += log(100./1.)*pow(10., 1.5 - 6.*randomU())*randn();
-		mu1 = mod(mu1 -  log(1.), log(100./3.)) + log(1.);
+		mu1 = mod(mu1 -  log(1.), log(100./1.)) + log(1.);
 		mu1 = exp(mu1);
 	}
 	if(which == 2)
