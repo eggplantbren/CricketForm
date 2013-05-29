@@ -13,6 +13,17 @@ class Data
 	public:
 		Data();
 		void load(const char* filename);
+
+		// Getters
+		int  get_score(int i) const { return score[i]; }
+		bool get_out(int i) const { return out[i]; }
+
+
+	// Static instance
+	private:
+		static Data instance;
+	public:
+		static const Data& get_instance() { return instance; }
 };
 
 #endif
