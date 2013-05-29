@@ -47,8 +47,8 @@ void MyModel::assemble()
 
 void MyModel::fromPrior()
 {
-	mu0 = exp(log(3.) + log(60./3.)*randomU());
-	mu1 = exp(log(3.) + log(60./3.)*randomU());
+	mu0 = exp(log(1.) + log(100./1.)*randomU());
+	mu1 = exp(log(1.) + log(100./1.)*randomU());
 	L = exp(log(0.1) + log(100./0.1)*randomU());
 
 	assemble();
@@ -60,15 +60,15 @@ double MyModel::perturb1()
 	if(which == 0)
 	{
 		mu0 = log(mu0);
-		mu0 += log(60./3.)*pow(10., 1.5 - 6.*randomU())*randn();
-		mu0 = mod(mu0 -  log(3.), log(60./3.)) + log(3.);
+		mu0 += log(100./1.)*pow(10., 1.5 - 6.*randomU())*randn();
+		mu0 = mod(mu0 -  log(1.), log(100./1.)) + log(1.);
 		mu0 = exp(mu0);
 	}
 	if(which == 1)
 	{
 		mu1 = log(mu1);
-		mu1 += log(60./3.)*pow(10., 1.5 - 6.*randomU())*randn();
-		mu1 = mod(mu1 -  log(3.), log(60./3.)) + log(3.);
+		mu1 += log(100./1.)*pow(10., 1.5 - 6.*randomU())*randn();
+		mu1 = mod(mu1 -  log(1.), log(100./3.)) + log(1.);
 		mu1 = exp(mu1);
 	}
 	if(which == 2)
