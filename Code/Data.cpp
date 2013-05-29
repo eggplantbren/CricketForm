@@ -7,6 +7,7 @@ using namespace std;
 Data Data::instance;
 
 Data::Data()
+:N(0)
 {
 
 }
@@ -41,7 +42,8 @@ void Data::load(const char* filename)
 		out.push_back(temp2);
 	}
 	fin.close();
+	N = static_cast<int>(score.size());
 
-	cout<<"Found "<<score.size()<<" scores."<<endl;
+	cout<<"Found "<<N<<" scores."<<endl;
 }
 

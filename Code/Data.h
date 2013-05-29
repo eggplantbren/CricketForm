@@ -7,6 +7,7 @@
 class Data
 {
 	private:
+		int N;
 		std::vector<int> score;
 		std::vector<bool> out;
 
@@ -17,7 +18,7 @@ class Data
 		// Getters
 		int  get_score(int i) const { return score[i]; }
 		bool get_out(int i) const { return out[i]; }
-
+		int get_N() const { return N; }
 
 	// Static instance
 	private:
