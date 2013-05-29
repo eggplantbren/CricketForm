@@ -1,6 +1,7 @@
 #include "MyModel.h"
 #include "RandomNumberGenerator.h"
 #include "Utils.h"
+#include "Data.h"
 #include <cmath>
 
 using namespace std;
@@ -104,6 +105,20 @@ string MyModel::description() const
 double MyModel::logLikelihood() const
 {
 	double logL = 0.;
+
+	for(int i=0; i<Data::get_instance().get_N(); i++)
+	{
+		if(Data::get_instance().get_out(i))
+		{
+			logL += log_prob_equal
+				[Data::get_instance().get_score(i)];
+		}
+		else
+		{
+			logL += log_prob_geq
+				[Data::get_instance().get_score(i)];
+		}
+	}
 
 	return logL;
 }
