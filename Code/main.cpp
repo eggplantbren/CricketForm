@@ -21,6 +21,7 @@
 #include <iomanip>
 #include "Start.h"
 #include "MyModel.h"
+#include "Data.h"
 
 using namespace std;
 using namespace DNest3;
@@ -32,6 +33,8 @@ int main(int argc, char** argv)
 	#else
 	Sampler<MyModel> sampler = setup<MyModel>(argc, argv);
 	#endif
+
+	Data::get_instance().load("Data/lara.txt");
 
 	sampler.run();
 	return 0;
