@@ -20,7 +20,7 @@ void MyModel::assemble()
 {
 	// Compute effective average as a function of score
 	for(int i=0; i<max_score; i++)
-		effective_average[i] = mu0 + (mu1 - mu0)*exp(-i/L);
+		effective_average[i] = mu1 + (mu0 - mu1)*exp(-i/L);
 
 	// Compute log[P(X >= x)]
 	log_prob_geq[0] = 0.;
