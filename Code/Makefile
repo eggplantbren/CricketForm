@@ -1,6 +1,6 @@
 CFLAGS = -O2 -Wall -Wextra -ansi -pedantic
 LIBS =  -ldnest3 -lgsl -lgslcblas -lboost_system -lboost_thread
-OBJECTS = MyModel.o
+OBJECTS = Data.o MyModel.o
 
 default:
 	g++ $(CFLAGS) -c *.cpp
