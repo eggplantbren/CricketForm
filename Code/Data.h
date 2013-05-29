@@ -24,7 +24,7 @@ class Data
 	private:
 		static Data instance;
 	public:
-		static const Data& get_instance() { return instance; }
+		static Data& get_instance() { return instance; }
 };
 
 #endif
