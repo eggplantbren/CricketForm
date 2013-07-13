@@ -7,22 +7,8 @@
 class MyModel:public DNest3::Model
 {
 	private:
-		static const int max_score;
-
-	private:
-		double mu0, mu1;
-		double L;
-
-		// Derived stuff: the hazard function etc
-		std::vector<double> effective_average,
-			log_prob_geq, log_prob_equal;
-
-		// Compute the derived stuff
-		void assemble();
-
-		// Perturb a single parameter
-		double perturb1();
-
+		// Mixture of two geometrics
+		double mu1, mu2, w;
 
 	public:
 
@@ -36,3 +22,4 @@ class MyModel:public DNest3::Model
 };
 
 #endif
+
