@@ -28,13 +28,13 @@ using namespace DNest3;
 
 int main(int argc, char** argv)
 {
+	Data::get_instance().load("Data/srt.txt");
+
 	#ifndef DNest3_No_Boost
 	MTSampler<MyModel> sampler = setup_mt<MyModel>(argc, argv);
 	#else
 	Sampler<MyModel> sampler = setup<MyModel>(argc, argv);
 	#endif
-
-	Data::get_instance().load("Data/lara.txt");
 
 	sampler.run();
 	return 0;
